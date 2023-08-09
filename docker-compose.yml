@@ -1,0 +1,22 @@
+version: '3'
+services:
+  mysql:
+    container_name: mysql-container
+    image: mysql:latest
+    env_file:
+      - .env.development
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD = ${MYSQL_ROOT_PASSWORD}
+    # volumes:
+    #   - ./src/data/data.db:/var/lib/mysql/
+    ports:
+      - "${MYSQL_PORT}:3306"
+  redis:
+    container_name: redis-container
+    image: redis:latest
+    env_file:
+      - .env.development
+    restart: always
+    ports:
+      - "${REDIS_PORT}:6379"
