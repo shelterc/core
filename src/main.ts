@@ -1,10 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { logger, runtime } from './runtime';
-import createSwagger from './swagger';
 import { resTransformInterceptor } from './Interceptors/res.transform.interceptor';
 import { HttpExceptionFilter } from './filters/http.exception.filter';
 import { ValidationPipe } from '@nestjs/common';
+import createSwagger from './swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,6 +17,8 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
   // 处理跨域
   app.enableCors();
+  // 设置路由前缀
+  app.setGlobalPrefix('api');
   createSwagger(app);
   await app.listen(port, () => {
     logger(address, port);

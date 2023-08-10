@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import config from './config/config';
 import { UserModule } from './module/user/user.module';
 import { TestModule } from './module/test/test.module';
-import { RedisModule } from './plugin/redis/redis.module';
+import { RedisModule } from './plugin/redis';
 
 @Module({
   imports: [

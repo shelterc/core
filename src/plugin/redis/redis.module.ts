@@ -1,6 +1,5 @@
 import { Module, DynamicModule, Global, Provider } from '@nestjs/common';
 import { RedisModuleAsyncOptions, RedisModuleOptions } from './redis.interface';
-import { RedisFactory } from './redis.factory';
 import { REDIS_CLIENTS } from './redis.contanst';
 import { RedisService } from './redis.service';
 import Redis, { RedisOptions } from 'ioredis';
@@ -14,7 +13,7 @@ export class RedisModule {
   static forRoot(options: RedisModuleOptions): DynamicModule {
     const redisProvider: Provider = {
       provide: REDIS_CLIENTS,
-      useValue: new RedisFactory(options).getRedisClient(),
+      useValue: new Redis(options),
     };
     return {
       module: RedisModule,
@@ -29,9 +28,7 @@ export class RedisModule {
       provide: REDIS_CLIENTS,
       useFactory: async (...args): Promise<Redis> => {
         const redisOptions: RedisOptions = await useFactory(...args);
-        const redisClient = await new RedisFactory(
-          redisOptions,
-        ).getRedisClient();
+        const redisClient = await new Redis(redisOptions);
         return redisClient;
       },
       inject,
