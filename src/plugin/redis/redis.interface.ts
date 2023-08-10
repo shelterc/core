@@ -1,8 +1,7 @@
 import { ModuleMetadata } from '@nestjs/common';
+import { RedisOptions } from 'ioredis';
 
-export interface RedisModuleOptions {
-  [key: string]: any;
-}
+export interface RedisModuleOptions extends RedisOptions {}
 export interface RedisModuleAsyncOptions
   extends Pick<ModuleMetadata, 'imports'> {
   useFactory?: (

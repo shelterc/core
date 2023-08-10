@@ -1,6 +1,5 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { WxConfigModule } from './module/wxConfig/wxConfig.module';
-import { AppController } from './app.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import config from './config/config';
@@ -21,27 +20,26 @@ import { RedisModule } from './plugin/redis/redis.module';
       },
       inject: [ConfigService],
     }),
-    // 同步
-    RedisModule.forRoot({
-      port: 6379,
-      host: 'localhost',
-      username: 'default',
-      password: 'my-top-secret',
-      db: 0,
-    }),
     // 异步
-    // RedisModule.forRootAsync({
-    //   useFactory: (config: ConfigService) => {
-    //     console.log('redis', config);
-    //     return config.get('redis');
-    //   },
-    //   inject: [ConfigService],
+    RedisModule.forRootAsync({
+      useFactory: (config: ConfigService) => {
+        return config.get('redis');
+      },
+      inject: [ConfigService],
+    }),
+    // 同步
+    // RedisModule.forRoot({
+    //   port: 6379,
+    //   host: 'localhost',
+    //   username: 'default',
+    //   password: 'my-top-secret',
+    //   db: 0,
     // }),
+
     WxConfigModule,
     UserModule,
     TestModule,
   ],
-  controllers: [AppController],
 })
 export class AppModule implements NestModule {
   // 中间件

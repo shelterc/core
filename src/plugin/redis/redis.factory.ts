@@ -1,11 +1,11 @@
-import Redis from 'ioredis';
+import Redis, { RedisOptions } from 'ioredis';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class RedisFactory {
   private redisClient: Redis;
 
-  constructor(options: any) {
+  constructor(options: RedisOptions) {
     this.redisClient = new Redis(options);
   }
 
