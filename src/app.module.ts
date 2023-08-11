@@ -20,22 +20,12 @@ import { RedisModule } from './plugin/redis';
       },
       inject: [ConfigService],
     }),
-    // 异步
     RedisModule.forRootAsync({
       useFactory: (config: ConfigService) => {
         return config.get('redis');
       },
       inject: [ConfigService],
     }),
-    // 同步
-    // RedisModule.forRoot({
-    //   port: 6379,
-    //   host: 'localhost',
-    //   username: 'default',
-    //   password: 'my-top-secret',
-    //   db: 0,
-    // }),
-
     WxConfigModule,
     UserModule,
     TestModule,

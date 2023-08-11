@@ -28,12 +28,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
       exception instanceof HttpException
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
-    const exceptionRes = exception.getResponse();
+    const exceptionRes: any = exception.getResponse();
+    console.log(exceptionRes)
+    const errRes = exceptionRes?.data?.response;
 
     // 控制台打印并写入文件
     this.Logger.error(
       `当前请求路径是:${request.url}，请求方法是:${request.method}`,
-      JSON.stringify(exceptionRes),
+      `错误信息为：${JSON.stringify(exceptionRes)}`,
     );
 
     response.status(status);

@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, Validate } from 'class-validator';
+import { IsValidEmail } from './user.dto.validate';
 
 export class UserBaseDto {
   @ApiProperty({ example: 'Answers', description: '用户名', required: true })
@@ -10,6 +11,7 @@ export class UserBaseDto {
   @IsNotEmpty({ message: '密码不能为空' })
   password: string;
 }
+
 export class UserRegisterDto extends UserBaseDto {
   @ApiProperty({
     example: 'xxx@gmail.com',
@@ -17,6 +19,7 @@ export class UserRegisterDto extends UserBaseDto {
     required: true,
   })
   @IsNotEmpty({ message: '注册邮箱不能为空' })
+  @Validate(IsValidEmail)
   email: string;
 }
 

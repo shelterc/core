@@ -14,21 +14,23 @@ export class UserService {
 
   async register(data: UserRegisterDto): Promise<any> {
     try {
-      const isExist = await this.userEntityRepository.findOne({
+      const isExistUsername = await this.userEntityRepository.findOne({
         where: {
           username: data.username,
         },
       });
-      const user1 = await this.userEntityRepository.findOne({
+      if (isExistUsername) throw new errResult(201, '用户名已被注册');
+      const isExistEmail = await this.userEntityRepository.findOne({
         where: {
           email: data.email,
         },
       });
-      if (isExist) throw new errResult(201, '用户名已被注册');
-      if (user1) throw new errResult(201, '邮箱已被注册');
-      return '12312';
+      if (isExistEmail) throw new errResult(201, '邮箱已被注册');
+
+      return await this.userEntityRepository.save(data);
     } catch (error) {
-      throw new errResult(500, 'error', error);
+      throw error;
+      // throw new errResult(500, '服务端出错', error);
     }
   }
   async emailRegister(data: UserRegisterDto): Promise<any> {

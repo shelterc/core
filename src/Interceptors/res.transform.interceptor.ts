@@ -1,12 +1,3 @@
-/*
- * @Author:
- * @Date: 2021-12-31 10:10:19
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-08-09 10:57:50
- * @Description: 响应拦截器
- * @FilePath: \core\src\Interceptors\res.transform.interceptor.ts
- */
-
 import {
   Injectable,
   NestInterceptor,
@@ -28,6 +19,7 @@ export class resTransformInterceptor implements NestInterceptor {
         if (path == '/wx/configVerification') {
           return data;
         } else {
+          console.log(data);
           return {
             data,
             code: 200,

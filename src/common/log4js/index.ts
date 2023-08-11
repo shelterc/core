@@ -32,6 +32,6 @@ export class LoggerService {
   }
 
   error(message: any, trace: string) {
-    this.log4js.error(trace, message);
+    this.log4js.error(message, trace);
   }
 }
