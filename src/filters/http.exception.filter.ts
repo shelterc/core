@@ -29,8 +29,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
     const exceptionRes: any = exception.getResponse();
-    console.log(exceptionRes)
-    const errRes = exceptionRes?.data?.response;
 
     // 控制台打印并写入文件
     this.Logger.error(

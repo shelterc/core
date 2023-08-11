@@ -19,7 +19,6 @@ export class resTransformInterceptor implements NestInterceptor {
         if (path == '/wx/configVerification') {
           return data;
         } else {
-          console.log(data);
           return {
             data,
             code: 200,
