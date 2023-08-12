@@ -11,6 +11,7 @@ export class TestController {
   @Get('/getKey')
   @ApiOperation({ summary: '测试redis' })
   async test(@Query('key') key: string) {
+    console.log(key);
     return [await this.testService.get1(key), await this.testService.get2(key)];
   }
 }

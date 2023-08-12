@@ -24,3 +24,19 @@ export class UserRegisterDto extends UserBaseDto {
 }
 
 export class UserLoginDto extends UserBaseDto {}
+
+export class UserListPageDto {
+  @ApiProperty({
+    example: 1,
+    description: '页码',
+    required: false,
+  })
+  page: number;
+
+  @ApiProperty({
+    example: 1,
+    description: '记录数',
+    required: false,
+  })
+  limit: number;
+}

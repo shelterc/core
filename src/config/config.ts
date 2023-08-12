@@ -22,4 +22,5 @@ export default () => ({
     password: 'my-top-secret',
     db: 0,
   },
+  jwt_secret: process.env.JWT_SECRET,
 });

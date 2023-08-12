@@ -4,13 +4,14 @@ import {
   Catch,
   ArgumentsHost,
   HttpStatus,
+  Inject,
 } from '@nestjs/common';
 import { Response, Request } from 'express';
-import { LoggerService } from '../common/log4js';
+import { LoggerService } from '../common/logger/logger.service';
 
 // @Catch 注解传入参数，如当前为只捕获HttpException的异常，其他类型的异常此类不进行处理
 @Catch(HttpException)
-export class HttpExceptionFilter implements ExceptionFilter {
+export class HttpExceptionFilterClass implements ExceptionFilter {
   private readonly Logger: LoggerService;
   constructor() {
     this.Logger = new LoggerService();

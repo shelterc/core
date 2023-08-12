@@ -1,5 +1,7 @@
 import { Logger as log4jsLogger, configure, getLogger } from 'log4js';
 import * as path from 'path';
+import { Injectable } from '@nestjs/common';
+@Injectable()
 export class LoggerService {
   log4js: log4jsLogger;
   constructor() {

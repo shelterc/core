@@ -6,6 +6,7 @@ import config from './config/config';
 import { UserModule } from './module/user/user.module';
 import { TestModule } from './module/test/test.module';
 import { RedisModule } from './plugin/redis';
+import { AuthModule } from './module/auth/auth.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { RedisModule } from './plugin/redis';
     WxConfigModule,
     UserModule,
     TestModule,
+    AuthModule,
   ],
 })
 export class AppModule implements NestModule {

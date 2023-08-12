@@ -1,5 +1,6 @@
 import { BaseEntity } from 'src/common/entity/BaseEntity';
 import { Entity, Column } from 'typeorm';
+import { hashSync } from 'bcryptjs';
 
 @Entity({ name: 'user' })
 export class UserEntity extends BaseEntity {
@@ -13,11 +14,9 @@ export class UserEntity extends BaseEntity {
     type: 'varchar',
     comment: '密码',
     nullable: false,
-    select: false,
+    // select: false,
     transformer: {
-      to: (value) => {
-        return value ? value + '111' : value;
-      },
+      to: (value) => hashSync(value),
       from: (value) => value,
     },
   })
