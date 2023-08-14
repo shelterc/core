@@ -4,12 +4,16 @@ import { UserEntity } from './user.entity';
 import { Repository } from 'typeorm';
 import { UserRegisterDto, UserLoginDto, UserListPageDto } from './user.dto';
 import { errResult } from 'src/common/result/result';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userEntityRepository: Repository<UserEntity>,
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
   ) {}
 
   async register(data: UserRegisterDto): Promise<string> {
@@ -40,8 +44,12 @@ export class UserService {
     } catch (error) {}
   }
 
-  async login(data: UserLoginDto) {
-    return 'login`';
+  async login(params: UserEntity) {
+    // return 'login';
+    const token = this.jwtService.sign(params.id, {
+      secret: this.configService.get('jwt_secret'),
+    });
+    return token;
   }
 
   async list(params: UserListPageDto) {
@@ -49,8 +57,8 @@ export class UserService {
     const list = await this.userEntityRepository
       .createQueryBuilder()
       .orderBy('created_at')
-      .skip(params.page || 1)
-      .take(params.limit || 20)
+      .skip(params.page || 0)
+      .take(params.limit || 10)
       .getMany();
     return {
       list,

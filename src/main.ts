@@ -6,7 +6,6 @@ import { HttpExceptionFilterClass } from './filters/http.exception.filter';
 import { ValidationPipe } from '@nestjs/common';
 import createSwagger from './swagger';
 import { AuthGuard } from './guard/auth.guard';
-import { JwtAuthGuard } from './guard/jwt.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -18,7 +17,7 @@ async function bootstrap() {
   // 全局异常过滤器
   app.useGlobalFilters(new HttpExceptionFilterClass());
   // 设置全局守卫
-  // app.useGlobalGuards(new JwtAuthGuard('jwt'));
+  // app.useGlobalGuards(new AuthGuard());
   // 处理跨域
   app.enableCors();
   // 设置路由前缀

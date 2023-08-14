@@ -7,6 +7,7 @@ import { UserModule } from './module/user/user.module';
 import { TestModule } from './module/test/test.module';
 import { RedisModule } from './plugin/redis';
 import { AuthModule } from './module/auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -32,6 +33,12 @@ import { AuthModule } from './module/auth/auth.module';
     TestModule,
     AuthModule,
   ],
+  // providers: [
+  //   {
+  //     provide: APP_GUARD,
+  //     useClass: RouteAuthGuard,
+  //   },
+  // ],
 })
 export class AppModule implements NestModule {
   // 中间件

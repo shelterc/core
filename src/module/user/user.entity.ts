@@ -14,7 +14,7 @@ export class UserEntity extends BaseEntity {
     type: 'varchar',
     comment: '密码',
     nullable: false,
-    // select: false,
+    select: false,
     transformer: {
       to: (value) => hashSync(value),
       from: (value) => value,
