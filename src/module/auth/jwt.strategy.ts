@@ -17,11 +17,14 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
       ignoreExpiration: false,
       secretOrKey: configService.get('jwt_secret'),
     };
-    super({ ...params, ...options });
+    super({
+      ...options,
+      ...params,
+    });
   }
+
   async validate(id: string): Promise<boolean> {
     console.log('进入jwt策略', id);
-    // return false;
     return this.authService.validateTokenStrategy(id);
   }
 }

@@ -42,7 +42,6 @@ export class AuthService {
 
   // 解密token(策略方式)
   async validateTokenStrategy(id: string): Promise<any> {
-    // 解密token，如果解密成功会返回数据，如果打印不到这个e证明token有问题
     return await this.userEntityRepository.findOne({ where: { id } });
   }
 }

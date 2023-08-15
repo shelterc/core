@@ -1,6 +1,5 @@
 import { Injectable, Optional } from '@nestjs/common';
-import { Strategy } from 'passport-local';
-import { IStrategyOptions } from 'passport-local';
+import { Strategy, IStrategyOptions } from 'passport-local';
 import { AuthModuleOptions, PassportStrategy } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { UserEntity } from '../user/user.entity';
@@ -14,12 +13,14 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
       usernameField: 'username',
       passwordField: 'password',
     };
-    super({ ...params, ...options, property: 'test' });
+    super({ ...params, ...options });
   }
   // 返回一个非空值表示验证通过，返回 null 或抛出异常表示验证失败。
-  async validate(username: string, password: string): Promise<UserEntity> {
+  async validate(username: string, password: string): Promise<any> {
     console.log('进入本地策略');
-    // return '不想多说';
-    return this.authService.validateUserLocalStrategy({ username, password });
+    return this.authService.validateUserLocalStrategy({
+      username,
+      password,
+    });
   }
 }

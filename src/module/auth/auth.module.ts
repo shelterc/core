@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '../user/user.entity';
-import { PassportModule } from '@nestjs/passport';
+// import { PassportModule } from '@nestjs/passport';
+import { PassportModule } from '../../../lib';
 import { AuthService } from './auth.service';
 import { LocalStrategy } from './local.strategy';
 import { JwtService } from '@nestjs/jwt';
@@ -12,8 +13,15 @@ import { ConfigService } from '@nestjs/config';
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserEntity]),
-    PassportModule.register({
-      property: 'account',
+    // PassportModule.register({
+    //   property: 'account',
+    // }),
+    PassportModule.registerAsync({
+      useFactory: () => {
+        return {
+          property: 'custom_key',
+        };
+      },
     }),
     JwtModule.registerAsync({
       useFactory: (config: ConfigService) => {

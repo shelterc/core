@@ -28,8 +28,7 @@ export class UserController {
   @Post('/login')
   @ApiOperation({ summary: '登录' })
   @UseGuards(AuthGuard('local'))
-  async login(@Body() params: UserLoginDto, @Request() req) {
-    console.log(req.user);
+  async login(@Request() req) {
     return this.userService.login(req.user);
   }
 
