@@ -1,4 +1,4 @@
-import { BaseEntity } from 'src/common/entity/BaseEntity';
+import { BaseEntity } from '@/common/entity/BaseEntity';
 import { Entity, Column } from 'typeorm';
 import { hashSync } from 'bcryptjs';
 

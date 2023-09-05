@@ -8,6 +8,7 @@ import { TestModule } from './module/test/test.module';
 import { RedisModule } from './plugin/redis';
 import { AuthModule } from './module/auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
+import { TagModule } from './module/tag/tag.module';
 
 @Module({
   imports: [
@@ -29,9 +30,10 @@ import { APP_GUARD } from '@nestjs/core';
       inject: [ConfigService],
     }),
     WxConfigModule,
-    UserModule,
     TestModule,
     AuthModule,
+    UserModule,
+    TagModule,
   ],
   // providers: [
   //   {

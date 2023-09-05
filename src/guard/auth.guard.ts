@@ -4,8 +4,8 @@ import {
   HttpStatus,
   Injectable,
 } from '@nestjs/common';
-import { LoggerService } from '../common/logger/logger.service';
-import { errResult } from 'src/common/result/result';
+import { LoggerService } from '@/common/logger/logger.service';
+import { errResult } from '@/common/result/result';
 import { Reflector } from '@nestjs/core';
 
 @Injectable()

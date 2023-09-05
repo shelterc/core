@@ -12,7 +12,6 @@ import { UserService } from './user.service';
 import { UserListPageDto, UserLoginDto, UserRegisterDto } from './user.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from '../auth/auth.service';
-import { Public } from 'src/common/auth/auth.meta';
 
 @Controller('/user')
 @ApiTags('用户模块')

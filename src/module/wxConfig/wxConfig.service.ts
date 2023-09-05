@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import wxConfig from 'src/config/wx.config';
+import wxConfig from '@/config/wx.config';
 import * as sha1 from 'sha1';
 import {
   IWxAccessToken,
   IWxConfigVerification,
   IWxGotItUserInfo,
 } from './wxConfig.interface';
-import { errResult } from 'src/common/result/result';
+import { errResult } from '@/common/result/result';
 import { Response } from 'express';
 import {
   getAccessTokenApi,

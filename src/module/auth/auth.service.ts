@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { AuthLoginDto } from './auth.dto';
 import { compareSync } from 'bcryptjs';
-import { errResult } from 'src/common/result/result';
+import { errResult } from '@/common/result/result';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 

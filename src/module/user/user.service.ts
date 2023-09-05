@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './user.entity';
 import { Repository } from 'typeorm';
 import { UserRegisterDto, UserLoginDto, UserListPageDto } from './user.dto';
-import { errResult } from 'src/common/result/result';
+import { errResult } from '@/common/result/result';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 

@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '../user/user.entity';
-// import { PassportModule } from '@nestjs/passport';
-import { PassportModule } from '../../../lib';
+import { PassportModule } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { LocalStrategy } from './local.strategy';
 import { JwtService } from '@nestjs/jwt';

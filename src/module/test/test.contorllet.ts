@@ -1,7 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { TestService } from './test.service';
-import { RedisService } from '../../plugin/redis/redis.service';
+import { RedisService } from '@/plugin/redis/redis.service';
 
 @Controller('/test')
 @ApiTags('测试模块')

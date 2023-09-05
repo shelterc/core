@@ -1,5 +1,5 @@
-import wxConfig from 'src/config/wx.config';
-import request from '../../utils/request';
+import wxConfig from '@/config/wx.config';
+import request from '@/utils/request';
 import {
   IWxAccessToken,
   IWxGotItUserInfo,

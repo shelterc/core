@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Redis } from 'ioredis';
-import { InjectRedis } from 'src/plugin/redis';
-import { RedisService } from 'src/plugin/redis/redis.service';
+import { InjectRedis } from '@/plugin/redis';
+import { RedisService } from '@/plugin/redis/redis.service';
 
 @Injectable()
 export class TestService {

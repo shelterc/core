@@ -1,6 +1,6 @@
 import { Module, DynamicModule, Global, Provider } from '@nestjs/common';
 import { RedisModuleAsyncOptions, RedisModuleOptions } from './redis.interface';
-import { REDIS_CLIENTS } from './redis.contanst';
+import { REDIS_CLIENTS } from './redis.constant';
 import { RedisService } from './redis.service';
 import Redis, { RedisOptions } from 'ioredis';
 
