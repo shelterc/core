@@ -16,7 +16,7 @@ import { TagService } from './tag.service';
 export class TagController {
   constructor(private readonly tagService: TagService) {}
   @Post()
-  @ApiOperation({ summary: '创建标签/设置标签' })
+  @ApiOperation({ summary: '创建标签/更新标签' })
   async create(@Body() params: TagSetDto) {
     return this.tagService.set(params);
   }
