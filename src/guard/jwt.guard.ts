@@ -14,7 +14,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   // 返回值：应返回原始的 HTTP 请求对象（Request 对象）。
   getRequest<T = any>(context: ExecutionContext): T {
     const request = context.switchToHttp().getRequest();
-    console.log(request);
     return request;
   }
 
@@ -27,6 +26,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       context.getHandler(),
       context.getClass(),
     ]);
+    console.log('进来了');
     if (isAuth) return true;
     return super.canActivate(context);
   }

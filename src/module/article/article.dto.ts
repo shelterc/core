@@ -24,7 +24,7 @@ export class ArticleSetDto {
   cover_img: string;
 
   @ApiProperty({
-    example: ['e8c8f8cd-b9c5-4d02-8077-457c3bcb64db'],
+    example: ['218fde89-6acc-4abe-a4cc-7b17c0715ed3'],
     description: '关联标签',
   })
   tag_ids: string[];
@@ -34,11 +34,4 @@ export class ArticleSetDto {
     description: '文章id，传入更新，不传新增',
   })
   article_id: string;
-
-  @ApiProperty({
-    example: '676159a0fbc3',
-    description: '用户id',
-  })
-  @IsNotEmpty({ message: '用户id不能为空' })
-  user_id: string;
 }

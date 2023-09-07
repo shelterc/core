@@ -45,7 +45,6 @@ export class UserService {
   }
 
   async login(params: UserEntity) {
-    // return 'login';
     const token = this.jwtService.sign(params.id, {
       secret: this.configService.get('jwt_secret'),
     });

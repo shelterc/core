@@ -1,5 +1,5 @@
 import { BaseEntity } from '@/common/entity/BaseEntity';
-import { Entity, Column, JoinTable, ManyToMany } from 'typeorm';
+import { Entity, Column, OneToMany } from 'typeorm';
 import { hashSync } from 'bcryptjs';
 import { ArticleEntity } from '../article/article.entity';
 
@@ -31,17 +31,6 @@ export class UserEntity extends BaseEntity {
   })
   email: string;
 
-  @JoinTable({
-    name: 'user_article',
-    joinColumn: {
-      name: 'user_id',
-      referencedColumnName: 'id',
-    },
-    inverseJoinColumn: {
-      name: 'article_id',
-      referencedColumnName: 'id',
-    },
-  })
-  @ManyToMany((entity) => ArticleEntity, { cascade: true })
+  @OneToMany(() => ArticleEntity, (article) => article.user)
   articles: ArticleEntity[];
 }
