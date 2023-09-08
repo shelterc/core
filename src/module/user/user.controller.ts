@@ -12,6 +12,7 @@ import { UserService } from './user.service';
 import { UserListPageDto, UserLoginDto, UserRegisterDto } from './user.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from '../auth/auth.service';
+import { IsPublic } from '@/common/decorator';
 
 @Controller('/user')
 @ApiTags('用户模块')
@@ -27,6 +28,7 @@ export class UserController {
   @Post('/login')
   @ApiOperation({ summary: '登录' })
   @UseGuards(AuthGuard('local'))
+  @IsPublic()
   async login(@Body() _: UserLoginDto, @Request() req) {
     return this.userService.login(req.user);
   }

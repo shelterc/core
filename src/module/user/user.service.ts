@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './user.entity';
 import { Repository } from 'typeorm';
 import { UserRegisterDto, UserLoginDto, UserListPageDto } from './user.dto';
-import { errResult } from '@/common/result/result';
+import { ErrResult } from '@/common/result/result';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
@@ -23,20 +23,20 @@ export class UserService {
           username: data.username,
         },
       });
-      if (isExistUsername) throw new errResult(201, '用户名已被注册');
+      if (isExistUsername) throw new ErrResult(201, '用户名已被注册');
 
       const isExistEmail = await this.userEntityRepository.findOne({
         where: {
           email: data.email,
         },
       });
-      if (isExistEmail) throw new errResult(201, '邮箱已被注册');
+      if (isExistEmail) throw new ErrResult(201, '邮箱已被注册');
 
       await this.userEntityRepository.save(data);
       return 'ok';
     } catch (error) {
       throw error;
-      // throw new errResult(500, '服务端出错', error);
+      // throw new ErrResult(500, '服务端出错', error);
     }
   }
   async emailRegister(data: UserRegisterDto): Promise<any> {

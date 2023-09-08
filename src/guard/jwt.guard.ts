@@ -22,11 +22,10 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    const isAuth = this.reflector.getAllAndOverride<boolean>('isAuth', [
+    const isAuth = this.reflector.getAllAndOverride<boolean>('isPublic', [
       context.getHandler(),
       context.getClass(),
     ]);
-    console.log('进来了');
     if (isAuth) return true;
     return super.canActivate(context);
   }

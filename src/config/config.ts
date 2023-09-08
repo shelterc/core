@@ -7,7 +7,7 @@ export default () => ({
     password: process.env.MYSQL_ROOT_PASSWORD,
     database: 'shelter',
     timezone: '+08:00',
-    logging: false,
+    logging: true,
     synchronize: true, // 生产环境要关闭
     dropSchema: false, // 每次建立连接时删除架构
     autoLoadEntities: true, //自动注入到entities，下面就没必要开启了

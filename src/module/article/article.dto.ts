@@ -33,5 +33,27 @@ export class ArticleSetDto {
     example: '',
     description: '文章id，传入更新，不传新增',
   })
-  article_id: string;
+  id: string;
+}
+
+export class ArticleListDto {
+  @ApiProperty({ example: '1', description: '页数', required: false })
+  page: string;
+
+  @ApiProperty({ example: '10', description: '条数', required: false })
+  pageSize: string;
+
+  @ApiProperty({
+    example: ['218fde89-6acc-4abe-a4cc-7b17c0715ed3'],
+    description: '标签',
+    required: false,
+  })
+  category: string[];
+
+  @ApiProperty({
+    example: 'a75f6b0e-f9e4-4876-bafa-c52b127c4704',
+    description: '用户',
+    required: false,
+  })
+  user_id: string;
 }

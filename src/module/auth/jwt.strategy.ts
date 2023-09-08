@@ -24,7 +24,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   }
 
   async validate(id: string): Promise<boolean> {
-    console.log('进入jwt策略', id);
+    console.log('进入jwt策略');
     return this.authService.validateTokenStrategy(id);
   }
 }

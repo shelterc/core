@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 
-export class errResult extends HttpException {
+export class ErrResult extends HttpException {
   constructor(code?: number, msg?: string, data?: unknown | {}) {
     super({ code, msg, data }, HttpStatus.OK);
   }

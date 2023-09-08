@@ -18,4 +18,4 @@ export const CurrentUser = createParamDecorator(
  * @description: 用于区分是否鉴权路由
  * @return {*}
  */
-export const IsAuth = () => SetMetadata('isAuth', true);
+export const IsPublic = () => SetMetadata('isPublic', true);

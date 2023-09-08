@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { AuthLoginDto } from './auth.dto';
 import { compareSync } from 'bcryptjs';
-import { errResult } from '@/common/result/result';
+import { ErrResult } from '@/common/result/result';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 
@@ -30,11 +30,11 @@ export class AuthService {
       .addSelect('user.password')
       .getOne();
     if (!user) {
-      throw new errResult(201, '没有找到当前用户');
+      throw new ErrResult(201, '没有找到当前用户');
     }
     const status = compareSync(e.password, user.password);
     if (!status) {
-      throw new errResult(400, '密码不正确');
+      throw new ErrResult(400, '密码不正确');
     }
 
     return user;

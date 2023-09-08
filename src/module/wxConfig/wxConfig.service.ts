@@ -6,7 +6,7 @@ import {
   IWxConfigVerification,
   IWxGotItUserInfo,
 } from './wxConfig.interface';
-import { errResult } from '@/common/result/result';
+import { ErrResult } from '@/common/result/result';
 import { Response } from 'express';
 import {
   getAccessTokenApi,
@@ -32,10 +32,10 @@ export class WxConfigService {
       if (sha1Str === signature) {
         return echostr;
       } else {
-        throw new errResult(401, '校验失败');
+        throw new ErrResult(401, '校验失败');
       }
     } catch (error) {
-      throw new errResult(500, error);
+      throw new ErrResult(500, error);
     }
   }
 
@@ -77,7 +77,7 @@ export class WxConfigService {
         }
       }
     } catch (error) {
-      throw new errResult(500, error);
+      throw new ErrResult(500, error);
     }
   }
 
@@ -93,7 +93,7 @@ export class WxConfigService {
         return await getFollowUserListApi(res.access_token);
       }
     } catch (error) {
-      throw new errResult(500, error);
+      throw new ErrResult(500, error);
     }
   }
 }

@@ -5,7 +5,7 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { LoggerService } from '@/common/logger/logger.service';
-import { errResult } from '@/common/result/result';
+import { ErrResult } from '@/common/result/result';
 import { Reflector } from '@nestjs/core';
 
 @Injectable()
@@ -33,7 +33,7 @@ export class AuthGuard implements CanActivate {
     // const { route, method } = request;
     // let a = true;
     // if (a) {
-    //   throw new errResult(HttpStatus.UNAUTHORIZED, '没有权限');
+    //   throw new ErrResult(HttpStatus.UNAUTHORIZED, '没有权限');
     // } else {
     //   return true;
     // }
