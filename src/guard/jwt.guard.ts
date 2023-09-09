@@ -2,6 +2,7 @@ import { ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
+import { ErrResult } from '@/common/result/result';
 
 //  与 class AuthGuard implements CanActivate 不同的是 ，@nestjs/passport 基于 CanActivate 二次拓展
 @Injectable()
@@ -27,6 +28,11 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       context.getClass(),
     ]);
     if (isAuth) return true;
-    return super.canActivate(context);
+    // 返回 false的话会返回nest的默认对象，提示用户无权访问资源 https://docs.nestjs.com/guards#putting-it-all-together
+    // return false
+    // 调用父类的canActivate方法并返回，则会返回父类封装的数据对象
+    // return super.canActivate(context);
+    // 自定义异常
+    throw new ErrResult(500, '没有权限');
   }
 }

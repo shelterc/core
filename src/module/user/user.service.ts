@@ -35,8 +35,7 @@ export class UserService {
       await this.userEntityRepository.save(data);
       return 'ok';
     } catch (error) {
-      throw error;
-      // throw new ErrResult(500, '服务端出错', error);
+      throw new ErrResult(500, error.message);
     }
   }
   async emailRegister(data: UserRegisterDto): Promise<any> {
@@ -44,13 +43,15 @@ export class UserService {
     } catch (error) {}
   }
 
-  async login(params: UserEntity) {
-    const token = this.jwtService.sign(params.id, {
-      secret: this.configService.get('jwt_secret'),
-    });
-    return token;
+  async login(params: UserEntity): Promise<string> {
+    return await this.jwtService.sign(
+      {
+        username: params.username,
+        id: params.id,
+      },
+      { secret: this.configService.get('jwt_secret') },
+    );
   }
-
   async list(params: UserListPageDto) {
     const count = await this.userEntityRepository.count();
     const list = await this.userEntityRepository

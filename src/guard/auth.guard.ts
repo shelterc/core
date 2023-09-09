@@ -1,11 +1,5 @@
-import {
-  CanActivate,
-  ExecutionContext,
-  HttpStatus,
-  Injectable,
-} from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { LoggerService } from '@/common/logger/logger.service';
-import { ErrResult } from '@/common/result/result';
 import { Reflector } from '@nestjs/core';
 
 @Injectable()
@@ -18,24 +12,11 @@ export class AuthGuard implements CanActivate {
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const isPublic = this.reflector.getAllAndOverride<boolean>('isPublic', [
+    const isAuth = this.reflector.getAllAndOverride<boolean>('isPublic', [
       context.getHandler(),
       context.getClass(),
     ]);
-    this.Logger.error('进入拦截器', '');
-    // if (isPublic) {
-    //   return true;
-    // }
-    return true;
-    // return super.canActivate(context);
-    // const request = context.switchToHttp().getRequest();
-    // const { authorization } = request.headers;
-    // const { route, method } = request;
-    // let a = true;
-    // if (a) {
-    //   throw new ErrResult(HttpStatus.UNAUTHORIZED, '没有权限');
-    // } else {
-    //   return true;
-    // }
+    if (isAuth) return true;
+    return this.canActivate(context);
   }
 }

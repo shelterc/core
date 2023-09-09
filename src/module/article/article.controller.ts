@@ -11,8 +11,9 @@ export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
   @Post()
   @ApiOperation({ summary: '新增文章/更新文章' })
-  @ApiBearerAuth()
+  // @ApiBearerAuth()
   async set(@Body() params: ArticleSetDto, @CurrentUser() user: UserEntity) {
+    console.log(user);
     return this.articleService.set(params, user);
   }
 

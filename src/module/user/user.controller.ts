@@ -12,7 +12,8 @@ import { UserService } from './user.service';
 import { UserListPageDto, UserLoginDto, UserRegisterDto } from './user.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from '../auth/auth.service';
-import { IsPublic } from '@/common/decorator';
+import { CurrentUser, IsPublic } from '@/common/decorator';
+import { UserEntity } from './user.entity';
 
 @Controller('/user')
 @ApiTags('用户模块')
@@ -29,12 +30,11 @@ export class UserController {
   @ApiOperation({ summary: '登录' })
   @UseGuards(AuthGuard('local'))
   @IsPublic()
-  async login(@Body() _: UserLoginDto, @Request() req) {
-    return this.userService.login(req.user);
+  async login(@Body() _: UserLoginDto, @CurrentUser() user: UserEntity) {
+    return this.userService.login(user);
   }
 
   @Get('list')
-  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ summary: '用户列表' })
   @ApiBearerAuth()
   async list(@Param() param: UserListPageDto) {

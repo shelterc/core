@@ -36,7 +36,7 @@ export class AuthService {
     if (!status) {
       throw new ErrResult(400, '密码不正确');
     }
-
+    
     return user;
   }
 

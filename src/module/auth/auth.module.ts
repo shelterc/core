@@ -12,16 +12,7 @@ import { ConfigService } from '@nestjs/config';
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserEntity]),
-    // PassportModule.register({
-    //   property: 'account',
-    // }),
-    PassportModule.registerAsync({
-      useFactory: () => {
-        return {
-          property: 'custom_key',
-        };
-      },
-    }),
+    PassportModule,
     JwtModule.registerAsync({
       useFactory: (config: ConfigService) => {
         return {
@@ -33,6 +24,5 @@ import { ConfigService } from '@nestjs/config';
     }),
   ],
   providers: [AuthService, JwtService, JwtStrategy, LocalStrategy],
-  exports: [JwtModule, AuthService],
 })
 export class AuthModule {}

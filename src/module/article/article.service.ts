@@ -75,28 +75,18 @@ export class ArticleService {
       const { page = 1, pageSize = 10, category, user_id } = params;
       const skip = (Number(page) - 1) * Number(pageSize);
       const take = Number(pageSize);
-      const user = await this.userEntityRepository.findOne({
-        where: { id: user_id },
-      });
-      const tags = await this.tagEntityRepository.find({
-        where: {
-          id: In(category),
-        },
-      });
+
       const list = await this.articleEntityRepository.find({
-        where: {
-          user,
-        },
+        where: { user: { id: user_id } },
+        relations: ['tags'],
         order: { createdAt: 'DESC' },
         skip,
         take,
         cache: false,
       });
+
       const count = await this.articleEntityRepository.count({
-        where: {
-          user,
-          tags,
-        },
+        where: { user: { id: user_id } },
       });
       return {
         list,
